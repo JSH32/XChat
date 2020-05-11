@@ -8,6 +8,8 @@ app.set('view engine', 'ejs')
 
 let server = app.listen(config.port, () => {
     console.log(`Server started at ${config.port}`)
+    
+    app.use(express.static('public')) // Public
     router.Router(app)
 
     new socketHandler(server).init()
