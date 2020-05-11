@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+</head>
+<body>
+
+    <input id="messageBox" type="text">
+    <button id="submitMsg" onclick="submitMsg()">Send Message</button>
+
+    <div id="messages">
+
+    </div>
+
+    <script>
+        const socket = io.connect("http://192.168.1.4:8081")
+
+        const submitMsg = () => {
+            const message = document.getElementById("messageBox").value
+            socket.emit("message", message)
+        }
+
+        socket.on('message', (msg) => {
+            const message = document.createElement('p')
+            message.innerHTML = msg
+            document.getElementById("messages").appendChild(message)
+        })
+    </script>
+</body>
+</html>
