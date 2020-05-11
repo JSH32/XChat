@@ -1,4 +1,6 @@
-const socket = io.connect("http://192.168.1.4:8081")
+const socket = io.connect("http://192.168.1.4:8081", {
+    query: {token: "leltoken"}
+})
 
 const submitMsg = () => {
     const message = document.getElementById("messageBox").value
@@ -7,6 +9,6 @@ const submitMsg = () => {
 
 socket.on('message', (msg) => {
     const message = document.createElement('p')
-    message.innerHTML = msg
+    message.innerHTML = msg.msg
     document.getElementById("messages").appendChild(message)
 })
